@@ -96,3 +96,6 @@ The GUI control tool for AxRobot system
           conda install -c anaconda cherrypy
           conda install -c conda-forge pyinstaller
    
+4. Clone or download the repository, then unzip full source code to your local folder "AX58200_AxRobot_BSP_vXXX\Tools\AxRobot_Utility\Source".
+5. Enter folder "AX58200_AxRobot_BSP_vXXX\Tools\AxRobot_Utility\Source" and performs Run.bat to try-run AxRobotUtility.
+

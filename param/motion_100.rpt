@@ -1,0 +1,217 @@
+#=================================================#
+# Title: Motion Parameter Report File
+# Firmware Version/Date: 10000100/20210321
+# Date Time: 2021-04-22 02:44:23 PM
+#=================================================#
+
+
+# Motion Segment Parameter Block
+segDEC=0
+segK=599
+segMS=0
+segSTS=None
+segMOD=3
+segCMD=0
+segI=1
+segN=1
+netSTS=3
+
+
+# Command Parameter Block
+cmdPOS=[32551, 64359, -97757, 31411, 82235, 115667, -17410]
+cmdVEL=[0, 0, 0, 0, 0, 0, 0]
+cmdACC=[0, 0, 0, 0, 0, 0, 0]
+cmdTRQ=[0, 0, 0, 0, 0, 0, 0]
+cmdMXD=[0, 0, 0, 0, 0, 0, 0]
+cmdANG=[32551, 64358, -97731, 31380, 82239, 109980, -17423]
+cmdSPD=[0, 0, 0, 0, 0, 0, 0]
+cmdAMP=[0, 0, 0, 0, 0, 0, 0]
+cmdOUT=[0, 0, 0, 0, 0, 0, 0]
+cmdMXC=[-1, -1, -1, -1, -1, -1, -1]
+cmdMXM=[0, 0, 0, 0, 0, 0, 0]
+cmdMXG=[0, 0, 0, 0, 0, 0, 0]
+cmdERR=[0, 1, -26, 31, -4, 5687, 13]
+cmdTG=[0, 0, 0, 0, 0, 0, 0]
+cmdTI=[0, 0, 0, 0, 0, 0, 0]
+cmdTF=[0, 0, 0, 0, 0, 0, 0]
+cmdDT=[0, 0, 0, 0, 0, 0, 0]
+cmdSIM=[0, 0, 1, 1, 1, 1, 1]
+cmdRST=[0, 0, 0, 0, 0, 0, 0]
+cmdOLD=[0, 0, 0, 0, 0, 0, 0]
+cmdOFF=[0, 0, 0, 0, 0, 0, 0]
+
+
+# ESC SDO/PDO Parameter Block
+sdoRx0=[4096, 4096, 0, 0, 0, 0, 0]
+sdoRxN=[128, 128, 0, 0, 0, 0, 0]
+sdoTx0=[4224, 4224, 0, 0, 0, 0, 0]
+sdoTxN=[128, 128, 0, 0, 0, 0, 0]
+pdoRx0=[4352, 4352, 0, 0, 0, 0, 0]
+pdoRxN=[14, 14, 0, 0, 0, 0, 0]
+pdoTx0=[5120, 5120, 0, 0, 0, 0, 0]
+pdoTxN=[14, 14, 0, 0, 0, 0, 0]
+
+
+# Electrical Gear Parameter Block
+drvORG=[0, 0, 0, 0, 0, 0, 0]
+drvINV=[0, 0, 0, 0, 0, 0, 0]
+drvMxH=[180000, 110000, 180000, 110000, 180000, 110000, 180000]
+drvMxL=[-180000, -110000, -180000, -110000, -180000, -110000, -180000]
+drvKpN=[307, 489, 1, 1, 1, 1, 1]
+drvKpD=[9, 9, 1, 1, 1, 1, 1]
+drvKvN=[307, 783, 1, 1, 1, 1, 1]
+drvKvD=[90, 144, 1, 1, 1, 1, 1]
+drvKsN=[307, 783, 1, 1, 1, 1, 1]
+drvKsD=[90, 144, 1, 1, 1, 1, 1]
+drvPOS=[0, 0, 0, 0, 0, 0, 0]
+drvSPD=[2500, 2500, 2500, 2500, 2500, 2500, 2500]
+drvTRQ=[0, 0, 0, 0, 0, 0, 0]
+drvOLD=[1, 1, 1, 1, 1, 1, 1]
+drvHLD=[1, 1, 1, 1, 1, 1, 1]
+drvERR=[100, 100, 100, 100, 100, 100, 100]
+
+
+# Extended Force Parameter Block
+extKG=[0, 0, 0, 0, 0, 0, 0]
+extKM=[0, 0, 0, 0, 0, 0, 0]
+extKA=[0, 0, 0, 0, 0, 0, 0]
+extKV=[0, 0, 0, 0, 0, 0, 0]
+extKV0=[0, 0, 0, 0, 0, 0, 0]
+extKS=[0, 0, 0, 0, 0, 0, 0]
+extKS0=[0, 0, 0, 0, 0, 0, 0]
+extSPD=[300, 300, 300, 300, 300, 300, 300]
+extSPD0=[20, 20, 20, 20, 20, 20, 20]
+extBRK=[200, 200, 200, 200, 200, 200, 200]
+extMXC=[0, 0, 0, 0, 0, 0, 0]
+extHLD=[50, 50, 50, 50, 50, 50, 50]
+oldVEL=[0, 0, 0, 0, 0, 0, 0]
+oldOUT=[999, -1000, 999, -1000, 1000, -1000, -1000]
+oldV0=[0, 0, 0, 0, 0, 0, 0]
+oldP1=[32551, 64359, -97757, 31411, 82235, 115667, -17410]
+oldP2=[32551, 64359, -97757, 31411, 82235, 115667, -17410]
+oldP3=[32551, 64359, -97757, 31411, 82235, 115667, -17410]
+oldM1=[0, -70, -97731, 31380, 82239, 109980, -17423]
+oldM2=[0, -70, -97731, 31380, 82239, 109980, -17423]
+
+
+# Extended Motion Segment Parameter Block
+segPOS=[32551000, 64364000, -97755000, 31411000, 82235000, 115665000, -17408000]
+segSPD=[0, 0, 0, 0, 0, 0, 0]
+segACC=[119, 146, 120, 179, 177, 181, 180]
+segF0=[3, 3, 3, 3, 3, 3, 3]
+segP0=[32551000, 64359362, -97757885, 31411000, 82235000, 115667162, -17410662]
+segS0=[0, 0, 0, 0, 0, 0, 0]
+segS1=[0, 0, 0, 0, 0, 0, 0]
+segHLD=[0, 0, 0, 0, 0, 0, 0]
+
+
+# EtherCAT Parameter Block
+escCMD=[0, 0, 0, 0, 0, 0, 0]
+escPOS=[1110350, 3496839, -97757, 31411, 82235, 110000, -17410]
+escVEL=[0, 0, 0, 0, 0, 0, 0]
+escTRQ=[0, 0, 0, 0, 0, 0, 0]
+escMXC=[1000, 1000, 1000, 1000, 1000, 1000, 1000]
+escANG=[1110370, 3496802, -97731, 31380, 82239, 109980, -17423]
+escSPD=[0, 0, 0, 0, 0, 0, 0]
+escAMP=[-90, 162, -117, 135, -18, 90, 54]
+escOUT=[-90, 162, -117, 135, -18, 90, 54]
+escSTS=[567, 567, 0, 0, 0, 0, 0]
+
+
+# Simulation Parameter Block
+simTRQ=[0, 0, 0, 0, 0, 0, 0]
+simSPD=[0, 0, 441, 890, -64, 914, 775]
+simANG=[0, 0, -977319, 313800, 822396, 1099803, -174230]
+simKP=[500, 500, 500, 500, 500, 500, 500]
+simKV=[9000, 9000, 9000, 9000, 9000, 9000, 9000]
+simKG=[1000, 1000, 1000, 1000, 1000, 1000, 1000]
+simKM=[200, 200, 200, 200, 200, 200, 200]
+simKA=[500, 500, 500, 500, 500, 500, 500]
+simKS=[50, 50, 50, 50, 50, 50, 50]
+simKS0=[200, 200, 200, 200, 200, 200, 200]
+simANG0=[0, -70, -97731, 31380, 82239, 109980, -17423]
+
+
+# Alarm Parameter Block
+almENB=0
+almMSK=63
+almANG1=1000
+almANG2=1000
+almSPD0=20
+almMS=5000
+almMOD=0
+almBRK=0
+
+
+# System Parameter Block
+sysCLK=11834155
+sys20K=0
+sysLOP=135320179
+sysKHZ=11834229
+sysON=185012
+sysOFF=7359
+powerON=0
+
+
+# LED Parameter Block
+ledR=49159
+ledG=7280
+ledY=28700
+ledB=1984
+ledMS=100
+ledBITS=0
+pKey=0
+pMask=0
+pInput=255
+pOutput=255
+
+
+# System Extended Parameter Block
+sysVERS=10000100
+sysDATE=20210321
+romVERS=0
+romDATE=0
+pdoCMD=8
+pdoNUM=0
+sdoSTS=0
+sdoERR=0
+netCMD=0
+extENB=1
+
+
+# DAS Parameter Block
+dasN=267
+dasCMD=0
+dasMS=40
+dasDT=34
+dasMAX=1333
+dasSIZ=8000
+dasCH=6
+dasV1=25
+dasV2=92
+dasV3=27
+dasV4=28
+dasV5=22
+dasV6=21
+dasV7=0
+dasV8=0
+dasV9=0
+
+
+# Misc. Parameter Block
+nAxis=7
+mmNum=1
+mmSpd=100
+mmAcc=1000
+mmDec=0
+spdM=1000
+t0M=2989
+t1M=0
+t2M=0
+t9M=2989
+
+
+# Diagnostic Parameter Block
+coeERR=0
+ldpERR=0
+foeERR=0

@@ -1,0 +1,103 @@
+{
+    "Gravity": {
+        "ToolWeight": 5,
+        "SamplingTime": 26,
+        "SpeedLimit": 2500,
+        "Speed": 50,
+        "InitialGravityFactor": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+    },
+    "Friction": {
+        "SamplingTime": 4,
+        "SpeedLimit": 2500,
+        "MinTestSpeed": 30,
+        "MaxTestSpeed": 300,
+        "TestSpeedSections": 10
+    },
+    "extForce": {
+        "SamplingTime": 20,
+        "Speed": 300,
+        "DecelerationLimit": 100,
+        "GravityFactor": [
+            0,
+            -998,
+            0,
+            -989,
+            0,
+            -989,
+            0
+        ],
+        "StaticFrictionFactor": [
+            111,
+            202,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "DynamicFrictionFactor": [
+            857,
+            88,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "DraggedStaticFrictionFactor": [
+            108,
+            202,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "DraggedDynamicFrictionFactor": [
+            1153,
+            88,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "ConcentricInertiaFactor": [
+            0,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "EccentricInertiaFactor": [
+            0,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "CollisionTestTorque": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "extForceSwitch": 300,
+        "EnbAlarmMode": 0
+    }
+}

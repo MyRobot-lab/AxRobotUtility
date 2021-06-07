@@ -1,0 +1,76 @@
+﻿#
+# 伺服馬達(PMC-400W)的開機參數預設
+# 
+
+#**  DAS模組 (..)
+
+#**  PDO模組
+pdoPOS=0;   pdoVEL=0;     pdoTRQ=0;
+pdoMXC=1000;
+
+#**  CMD模組
+cmdCMD=0;
+
+#**  SEG模組 (..)
+#**  MST模組 (..)
+#**  EXT模組 (..)
+
+#**  POS模組
+posDIV=256;
+posKP=300; posKI=0;
+posMXE=500; posMXI=0; posMXO=1000;
+
+#**  SPD模組
+spdFLT=10;
+spdKP=400;  spdKI=500;
+spdMXE=500; spdMXI=20000; spdMXO=1000;
+
+#**  AMP模組
+ampFLT=100;
+ampKP=60;   ampKI=200;
+ampMXE=300; ampMXI=5000; ampMXO=1000;
+
+#**  ESM模組 (..)
+#** RxTx模組 (..)
+#**  FOE模組 (..)
+#**  IOP模組 (..)
+
+#**  PWM模組
+pwmINV=0;
+
+#**  UVW模組
+uvwRDY=0;
+
+#**  ADC模組
+adcK=610;       adcSTD=12;  adcDLY=1;
+
+#**  ANG模組
+angABS=0x20000; angPOLE=8; angGEAR=161;
+angREL=121600;  angKN=475; angKD=512;
+
+#**  ABZ模組
+abzENB=1;  abzFLT=2;  abzINV=0;
+
+#**  HAL模組
+halENB=0;
+
+#**  BIS模組
+bisENB=1; bisBITS=17; bisMASK=0x7ffff;
+
+#**  SDO模組
+sdo1000=0x20192
+sdo6502=0x0081
+sdo1018=4
+
+#**  校準參數(stpTest9.py)
+iopMOD=0;
+pwmINV=1;
+angINV=0;
+uvwDEG0=313;
+angREL0= 0;
+angIDX0= 46329;
+angABS0= 46010;
+
+#**  版本設置
+romVERS=22000100;
+romDATE=20210317;

@@ -1,8 +1,9 @@
 # AxRobotUtility
 The GUI control tool for AxRobot system
+![image](https://user-images.githubusercontent.com/85493498/121017178-91034380-c7cf-11eb-902c-98963efdd70c.png)
 
 # AxRobot System Main Components
-
+![image](https://user-images.githubusercontent.com/85493498/121016000-387f7680-c7ce-11eb-8321-267924952b45.png)
 
 # Features
 - StartUp
@@ -78,7 +79,7 @@ The GUI control tool for AxRobot system
 3. There are two ways to create python environment, it is recommended to use first way to avoid package incompatibility issues.
 
    - Import env.yml file to create new python environment.
-
+![image](https://user-images.githubusercontent.com/85493498/121016800-27833500-c7cf-11eb-952e-3bd6a6f988aa.png)
 
    or
 

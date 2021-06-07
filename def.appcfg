@@ -1,0 +1,24 @@
+{
+    "APP_NAME": "AxRobotUtility",
+    "APP_VER": "1.0.0",
+    "USB_CDC_IDENTIFY": "VID:PID=0B95:5820",
+    "IMG_PATH": "./img/",
+    "MODEL_PATH": "./model/",
+    "PARAM_PATH": "./param/",
+    "SCRIPT_PATH": "./script/",
+    "SIMU3D_PATH": "./simu/",
+    "ECAT_MASTER_FW_PATH": "../../../Firmware/Binary/EtherCAT_Master_Firmware/AX58200_EtherCATMaster_Firmware_v100.bin",
+    "SERVO_FW_PATH": "../../../Firmware/Binary/EtherCAT_Slave_ServoDrive_Firmware/AX58200_ServoDrive_Firmware_v100.bin",
+    "SERVO_PARAM_PATH": [
+        "./param/AxisParam1.txt",
+        "./param/AxisParam2.txt",
+        "./param/AxisParam3.txt",
+        "./param/AxisParam4.txt",
+        "./param/AxisParam5.txt",
+        "./param/AxisParam6.txt",
+        "./param/AxisParam7.txt"
+    ],
+    "MOTION_CONFIG_PATH": "./param/motion_cfg.mcf",
+    "Ext_PY_PATH": "./program/",
+    "USER_GUIDE_PATH": "..\\..\\..\\Document\\AxRobot_UserGuide_v100.pdf"
+}

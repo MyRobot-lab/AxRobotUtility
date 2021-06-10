@@ -5,12 +5,12 @@ cd %~dp0\
 rd /s/q ..\Binary_x64
 md ..\Binary_x64
 cd ..\Binary_x64
-pyinstaller -F ..\Source\AxRobotUtility.py --hidden-import PyQt5.sip --noconsole
+pyinstaller -F ..\AxRobotUtility\AxRobotUtility.py --hidden-import PyQt5.sip --noconsole
 
 :: Copy resource
-xcopy ..\Source\img .\dist\img /i/e/d/y
-xcopy ..\Source\model .\dist\model /i/e/d/y
-xcopy ..\Source\param .\dist\param /i/e/d/y
-xcopy ..\Source\program .\dist\program /i/e/d/y
-xcopy ..\Source\script .\dist\script /i/e/d/y
-xcopy ..\Source\simu\stp .\dist\simu\stp /i/e/d/y
+xcopy ..\AxRobotUtility\img .\dist\img /i/e/d/y
+xcopy ..\AxRobotUtility\model .\dist\model /i/e/d/y
+xcopy ..\AxRobotUtility\param .\dist\param /i/e/d/y
+xcopy ..\AxRobotUtility\program .\dist\program /i/e/d/y
+xcopy ..\AxRobotUtility\script .\dist\script /i/e/d/y
+xcopy ..\AxRobotUtility\simu\stp .\dist\simu\stp /i/e/d/y

@@ -1,14 +1,4 @@
 # -*- coding: utf-8 -*-
-# /*
-#  *********************************************************************************
-#  *     Copyright (c) 2021 ASIX Electronics Corporation All rights reserved.
-#  *
-#  *     This is unpublished proprietary source code of ASIX Electronics Corporation
-#  *
-#  *     The copyright notice above does not evidence any actual or intended
-#  *     publication of such source code.
-#  *********************************************************************************
-#  */
 import os, sys, time, copy, logging, json, datetime
 from PyQt5.QtCore import QObject, pyqtSignal, QTimer, QThread, pyqtSlot, Qt, QSize, QCoreApplication
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QMessageBox, QLabel, QFrame, QProgressDialog
@@ -494,11 +484,11 @@ class Main(QMainWindow, Ui_MainWindow, QWidget):
             log.debug("Load %s file ok\r\n", filePath)
         else:
             log.debug("Create new %s file\r\n", filePath)
-            # If execution path contains "Binary_", 
+            # If execution path contains "\dist" string, 
             # that indicate performing binary file and MUST adjust related file path.
             log.debug("os.path.dirname(os.path.realpath(__file__)):%s\r\n", os.path.dirname(os.path.realpath(__file__)))
-            if os.path.dirname(os.path.realpath(__file__)).find("\Binary") >= 0:
-                log.debug("Startup from binary, adjust the resource path\r\n")
+            if os.path.dirname(os.path.realpath(__file__)).find("\dist") >= 0:
+                log.debug("Startup from dist forlder, adjust the resource path\r\n")
                 dctAPP_CFIG["ECAT_MASTER_FW_PATH"] = "../"+dctAPP_CFIG["ECAT_MASTER_FW_PATH"]
                 dctAPP_CFIG["SERVO_FW_PATH"] = "../"+dctAPP_CFIG["SERVO_FW_PATH"]
                 dctAPP_CFIG["USER_GUIDE_PATH"] = "..\\"+dctAPP_CFIG["USER_GUIDE_PATH"]

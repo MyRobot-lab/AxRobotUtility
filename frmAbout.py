@@ -1,14 +1,4 @@
 # -*- coding: utf-8 -*-
-# /*
-#  *********************************************************************************
-#  *     Copyright (c) 2021 ASIX Electronics Corporation All rights reserved.
-#  *
-#  *     This is unpublished proprietary source code of ASIX Electronics Corporation
-#  *
-#  *     The copyright notice above does not evidence any actual or intended
-#  *     publication of such source code.
-#  *********************************************************************************
-#  */
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import pyqtSlot, pyqtSignal, Qt
 from ui.frmAboutUi import *
@@ -27,21 +17,23 @@ class frmAbout(QWidget,Ui_FormAbout):
 
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
         self.setWindowModality(2)
-        self.setWindowIcon(QtGui.QIcon(dctAPP_CFIG["IMG_PATH"]+"asix.ico"))
-        self.lbInfoIcon.setPixmap(QtGui.QPixmap(dctAPP_CFIG["IMG_PATH"]+"infoIcon.png"))
 
-        self.lbTitle.setText("AxRobot Motion Control Utility")
+        # Load icon
+        if os.path.isfile(dctAPP_CFIG["ABOUT_ICON"]) == True:
+            self.setWindowIcon(QtGui.QIcon(dctAPP_CFIG["ABOUT_ICON"]))
+
+        # Build up information
+        self.lbAboutTitle.setText("AxRobot Motion Control Utility")
         strInfo = ""
         strInfo += "Version: {}\r\n".format(dctAPP_CFIG["APP_VER"])
         strInfo += "VCP Identification {}\r\n".format(dctAPP_CFIG["USB_CDC_IDENTIFY"])
-        strInfo += "OS: Windows10 x64\r\n"
-        # strInfo += "@ 2021 ASIX Electronics Corporation.\r\n"
-        # strInfo += "All rights reserved.\r\n\n"
+        strInfo += "OS: Windows7/10 x64\r\n"
         self.lbInfo.setText(strInfo)
 
-        self.lbAsixLink.setText("ASIX Web: <A href='https://www.asix.com.tw/'>https://www.asix.com.tw/</a>")
-        self.lbAsixLink.setOpenExternalLinks(True)
-
+        # Build up hyper link
+        self.lbHyperLink_1.setText("{}: <A href='{}'>{}</a>" \
+            .format(dctAPP_CFIG["LINK_TITLE_1"], dctAPP_CFIG["HYPER_LINK_1"], dctAPP_CFIG["HYPER_LINK_1"]))
+        self.lbHyperLink_1.setOpenExternalLinks(True)
 
         # Connect signal&slot paire
         self.btnCloseAbout.clicked.connect(self.click)

@@ -1,14 +1,4 @@
 # -*- coding: utf-8 -*-
-# /*
-#  *********************************************************************************
-#  *     Copyright (c) 2021 ASIX Electronics Corporation All rights reserved.
-#  *
-#  *     This is unpublished proprietary source code of ASIX Electronics Corporation
-#  *
-#  *     The copyright notice above does not evidence any actual or intended
-#  *     publication of such source code.
-#  *********************************************************************************
-#  */
 import sys, logging
 from PyQt5.QtWidgets import QWidget, QFileDialog, QTableWidgetItem
 from PyQt5.QtCore import QFileInfo, pyqtSlot, pyqtSignal, Qt

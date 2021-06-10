@@ -1,14 +1,4 @@
 # -*- coding: utf-8 -*-
-# /*
-#  *********************************************************************************
-#  *     Copyright (c) 2021 ASIX Electronics Corporation All rights reserved.
-#  *
-#  *     This is unpublished proprietary source code of ASIX Electronics Corporation
-#  *
-#  *     The copyright notice above does not evidence any actual or intended
-#  *     publication of such source code.
-#  *********************************************************************************
-#  */
 import sys, logging, math, time, random, os, copy, serial, datetime, inspect, numpy as np
 from PyQt5.QtCore import QObject, pyqtSignal, QTimer, QThread, pyqtSlot, Qt
 from AxRobotData import *
@@ -885,7 +875,6 @@ class MotionCtrl(QObject):
 
     @pyqtSlot(dict)
     def sltUpgradeProcess(self, dctCmd):
-        Result = -1
         self.SuspendRealTimeUpdate = 1
         for k, v in dctCmd.items():
             if k == "DownloadFirmware":
@@ -894,66 +883,124 @@ class MotionCtrl(QObject):
                 self.MotionData.SystemState = dctSYSTEM_STATE["UPGRADING"]
                 time.sleep(0.1)
 
-                # Download Single Servo firmware
+                # Download Single Servo Drive firmware
                 if v[0] > 2:
                     try:
-                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Open", \
-                            "Downloading Servo {} Firmware, Please Wait!".format(v[0]-2)]})
+                        axis_num = v[0]-2
+                        file_path = dctAPP_CFIG["SERVO_FW_PATH"]
 
-                        log.debug("Download Single Servo firmware: %s, %s\r\n", \
-                            dctAPP_CFIG["SERVO_FW_PATH"], "m"+str(v[0]-2))
-                        # exec(open(dctAPP_CFIG["Ext_PY_PATH"]+"escTest0.py","rb").read(), globals())
+                        # Check target files has exist
+                        if os.path.isfile(file_path) == False:
+                            self.sigMainWinEventHandler.emit({"SetMsgBox":["Error", \
+                                "The AxRobot ServoDrive firmware file isn't exist!"]})
+                            break
+
+                        # Create progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Open", \
+                            "Downloading AxRobot ServoDrive {} Firmware, Please Wait!".format(axis_num)]})
+
+                        # Start Upgrading
+                        log.debug("Download Single AxRobot ServoDrive firmware: %s, %s\r\n", file_path, "m"+str(axis_num))
                         exec(open(dctAPP_CFIG["Ext_PY_PATH"]+"foeTest0.py","rb").read(), globals())
-                        self.Conn.foeWrite(dctAPP_CFIG["SERVO_FW_PATH"], "m"+str(v[0]-2), self.SetUpgradingProgress)
-                        # Wait Servo restart up completed
-                        time.sleep(0.5)
+                        self.Conn.foeWrite(file_path, "m"+str(axis_num), self.SetUpgradingProgress)
+
+                        # Close progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
+
+                        # Reconnect and enter OP mode
+                        self.StartUp.sigEventHandler.emit({"Disconnect":[""]})
+                        time.sleep(0.5)# Wait device restart up completed
+                        self.StartUp.sigEventHandler.emit({"Reconnect":[""]})
+
                     except Exception as e:
-                        self.sigMainWinEventHandler.emit({"SetProgressBox":["SetValue", 100]})
+                        # Close progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
                         self.sigMainWinEventHandler.emit({"SetMsgBox":["Exception", self.GetMsgWithLineNumber(e)]})
                         break
                     finally:
                         pass
 
-                # Download All Servo firmware
+                # Download All AxRobot ServoDrives firmware
                 elif v[0] > 0:
                     try:
+                        result = 0
                         for i in range(self.StartUp.OnlineServoCount-1,-1,-1):
-                            self.sigMainWinEventHandler.emit({"SetProgressBox":["Open", \
-                                "Downloading Servo {} Firmware, Please Wait!".format(i+1)]})
+                            axis_num = i+1
+                            file_path = dctAPP_CFIG["SERVO_FW_PATH"]
 
-                            log.debug("Download Servo_%d firmware: %s, %s\r\n", \
-                                i+1, dctAPP_CFIG["SERVO_FW_PATH"], "m"+str(i+1))
-                            # exec(open(dctAPP_CFIG["Ext_PY_PATH"]+"escTest0.py","rb").read(), globals())
+                            # Check target files has exist
+                            if os.path.isfile(file_path) == False:
+                                self.sigMainWinEventHandler.emit({"SetMsgBox": \
+                                    ["Error", "The AxRobot ServoDrive firmware file isn't exist!"]})
+                                break
+
+                            # Create progress indicator
+                            self.sigMainWinEventHandler.emit({"SetProgressBox":["Open", \
+                                "Downloading AxRobot ServoDrive {} Firmware, Please Wait!".format(axis_num)]})
+
+                            # Start Upgrading
+                            log.debug("Download AxRobot ServoDrive_%d firmware: %s, %s\r\n", axis_num, file_path, "m"+str(axis_num))
                             exec(open(dctAPP_CFIG["Ext_PY_PATH"]+"foeTest0.py","rb").read(), globals())
-                            self.Conn.foeWrite(dctAPP_CFIG["SERVO_FW_PATH"], "m"+str(i+1), self.SetUpgradingProgress)
-                            # Wait Servo restart up completed
-                            time.sleep(0.5)
+                            self.Conn.foeWrite(file_path, "m"+str(axis_num), self.SetUpgradingProgress)
+                        
+                            # Close progress indicator
+                            self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
+                            result += 1
+                        
+                        # if fail to upgrading, exit the process
+                        if result < self.StartUp.OnlineServoCount:
+                            break
+                        
+                        if v[0] == 2:# reconnect for all ServoDrives item selected only
+                            # Reconnect and enter OP mode
+                            self.StartUp.sigEventHandler.emit({"Disconnect":[""]})
+                            time.sleep(0.5)# Wait device restart up completed
+                            self.StartUp.sigEventHandler.emit({"Reconnect":[""]})
+
                     except Exception as e:
-                        self.sigMainWinEventHandler.emit({"SetProgressBox":["SetValue", 100]})
+                        # Close progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
                         self.sigMainWinEventHandler.emit({"SetMsgBox":["Exception", self.GetMsgWithLineNumber(e)]})
                         break
                     finally:
                         pass
-                    if (v[0] == 2) and (i == 0):
-                        Result = 0
 
-                # Download EtherCAT Master firmware
+                # Download AxRobot Controller firmware
                 if v[0] <= 1:
                     try:
-                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Open", \
-                            "Downloading Master Firmware, Please Wait!"]})
+                        file_path = dctAPP_CFIG["ECAT_MASTER_FW_PATH"]
 
-                        log.debug("Download EtherCAT Master firmware: %s, m0\r\n", v[0])
+                        # Check target files has exist
+                        if os.path.isfile(file_path) == False:
+                            self.sigMainWinEventHandler.emit({"SetMsgBox":\
+                                ["Error", "The AxRobot Controller firmware file isn't exist!"]})
+                            break
+
+                        # Create progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Open", \
+                            "Downloading AxRobot Controller Firmware, Please Wait!"]})
+
+                        # Start Upgrading
+                        log.debug("Download AxRobot Controller firmware: m0\r\n")
                         exec(open(dctAPP_CFIG["Ext_PY_PATH"]+"foeTest0.py","rb").read(), globals())
-                        self.Conn.foeWrite(dctAPP_CFIG["ECAT_MASTER_FW_PATH"], "m0", self.SetUpgradingProgress)
-                        # Wait serial port restart ready
-                        Result = 0
+                        self.Conn.foeWrite(file_path, "m0", self.SetUpgradingProgress)
+
+                        # Close progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
+
+                        # Reconnect and enter OP mode
+                        self.StartUp.sigEventHandler.emit({"Disconnect":[""]})
+                        time.sleep(2.0)# Wait device restart up completed
+                        self.StartUp.sigEventHandler.emit({"Reconnect":[""]})
+
                     except Exception as e:
-                        self.sigMainWinEventHandler.emit({"SetProgressBox":["SetValue", 100]})
+                        # Close progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
                         self.sigMainWinEventHandler.emit({"SetMsgBox":["Exception", self.GetMsgWithLineNumber(e)]})
                         break
                     finally:
                         pass
+
             elif k == "DownloadParameter":
                 log.debug("sltUpgradeProcess.DownloadParameter: %s\r\n", v[0])
                 # Change status first
@@ -962,52 +1009,86 @@ class MotionCtrl(QObject):
 
                 # Download Single Servo Parameter
                 if v[0] > 0:
-                    self.sigMainWinEventHandler.emit({"SetProgressBox":["Open", \
-                        "Downloading Servo {} Parameter, Please Wait!".format(v[0])]})
                     try:
-                        log.debug("Download Single Servo Parameter: %s, %s\r\n", \
-                            dctAPP_CFIG["SERVO_PARAM_PATH"][v[0]-1], "m"+str(v[0]))
-                        # exec(open(dctAPP_CFIG["Ext_PY_PATH"]+"escTest0.py","rb").read(), globals())
+                        axis_num = v[0]
+                        file_path = dctAPP_CFIG["SERVO_PARAM_PATH"][axis_num-1]
+
+                        # Check target files has exist
+                        if os.path.isfile(file_path) == False:
+                            self.sigMainWinEventHandler.emit({"SetMsgBox":\
+                                ["Error", "The AxRobot ServoDrive parameter file isn't exist!"]})
+                            break
+
+                        # Create progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Open", \
+                            "Downloading AxRobot ServoDrive {} Parameter, Please Wait!".format(axis_num)]})
+
+                        # Start Upgrading
+                        log.debug("Download Single AxRobot ServoDrive Parameter: %s, %s\r\n", file_path, "m"+str(axis_num))
                         exec(open(dctAPP_CFIG["Ext_PY_PATH"]+"foeTest0.py","rb").read(), globals())
-                        self.Conn.foeWrite(dctAPP_CFIG["SERVO_PARAM_PATH"][v[0]-1], "m"+str(v[0]), self.SetUpgradingProgress)
-                        # Wait Servo restart up completed
-                        time.sleep(0.5)
-                        Result = 0
+                        self.Conn.foeWrite(file_path, "m"+str(axis_num), self.SetUpgradingProgress)
+                        
+                        # Close progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
+
+                        # Reconnect and enter OP mode
+                        self.StartUp.sigEventHandler.emit({"Disconnect":[""]})
+                        time.sleep(0.5)# Wait device restart up completed
+                        self.StartUp.sigEventHandler.emit({"Reconnect":[""]})
                     except Exception as e:
-                        self.sigMainWinEventHandler.emit({"SetProgressBox":["SetValue", 100]})
+                        # Close progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
                         self.sigMainWinEventHandler.emit({"SetMsgBox":["Exception", self.GetMsgWithLineNumber(e)]})
                         break
                     finally:
                         pass
+
                 # Download All Servo Parameter
                 else:
                     try:
+                        result = 0
                         for i in range(self.StartUp.OnlineServoCount-1, -1, -1):
+                            axis_num = i+1
+                            file_path = dctAPP_CFIG["SERVO_PARAM_PATH"][i]
+
+                            # Check target files has exist
+                            if os.path.isfile(file_path) == False:
+                                self.sigMainWinEventHandler.emit({"SetMsgBox": \
+                                    ["Error", "The AxRobot ServoDrive {} parameter file isn't exist!".format(axis_num)]})
+                                break
+
+                            # Create progress indicator
                             self.sigMainWinEventHandler.emit({"SetProgressBox":["Open", \
-                                "Downloading Servo {} Parameter, Please Wait!".format(i+1)]})
-                            log.debug("Download Servo_%d Parameter: %s, %s\r\n", \
-                                i+1, dctAPP_CFIG["SERVO_PARAM_PATH"][i], "m"+str(i+1))
-                            # exec(open(dctAPP_CFIG["Ext_PY_PATH"]+"escTest0.py","rb").read(), globals())
+                                "Downloading AxRobot ServoDrive {} Parameter, Please Wait!".format(axis_num)]})
+
+                            # Start Upgrading
+                            log.debug("Download Servo %d Parameter: %s, %s\r\n", axis_num, file_path, "m"+str(axis_num))
                             exec(open(dctAPP_CFIG["Ext_PY_PATH"]+"foeTest0.py","rb").read(), globals())
-                            self.Conn.foeWrite(dctAPP_CFIG["SERVO_PARAM_PATH"][i], "m"+str(i+1), self.SetUpgradingProgress)
-                            # Wait Servo restart up completed
-                            time.sleep(0.5)
+                            self.Conn.foeWrite(file_path, "m"+str(axis_num), self.SetUpgradingProgress)
+
+                            # Close progress indicator
+                            self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
+                            result += 1
+
+                        # if fail to upgrading, exit the process
+                        if result < self.StartUp.OnlineServoCount:
+                            break
+
+                        # Reconnect and enter OP mode
+                        self.StartUp.sigEventHandler.emit({"Disconnect":[""]})
+                        time.sleep(0.5)# Wait device restart up completed
+                        self.StartUp.sigEventHandler.emit({"Reconnect":[""]})
 
                     except Exception as e:
-                        self.sigMainWinEventHandler.emit({"SetProgressBox":["SetValue", 100]})
+                        # Close progress indicator
+                        self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
                         self.sigMainWinEventHandler.emit({"SetMsgBox":["Exception", self.GetMsgWithLineNumber(e)]})
                         break
                     finally:
                         pass
-                    if i == 0:
-                        Result = 0
         # End of command loop
         # Close progress box
         self.sigMainWinEventHandler.emit({"SetProgressBox":["Close"]})
-        if Result == 0:
-            # Reconnect and enter OP mode
-            self.StartUp.sigEventHandler.emit({"Disconnect":[""]})
-            self.StartUp.sigEventHandler.emit({"Reconnect":[""]})
         self.SuspendRealTimeUpdate = 0
 
     def SetUpgradingProgress(self, val):

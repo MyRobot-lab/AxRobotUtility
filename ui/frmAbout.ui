@@ -37,9 +37,9 @@
   <property name="windowTitle">
    <string>About</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="lbTitle">
+    <widget class="QLabel" name="lbAboutTitle">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -53,7 +53,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Title</string>
+      <string>About Title</string>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -64,90 +64,63 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="lbInfoIcon">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
+    <widget class="QGroupBox" name="groupBox">
      <property name="font">
       <font>
        <pointsize>12</pointsize>
       </font>
      </property>
-     <property name="text">
-      <string>InfoIcon</string>
+     <property name="title">
+      <string>Information</string>
      </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="lbInfo">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_4">
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="lbInfo">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Info</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_3">
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="lbAsixLink">
+    <widget class="QGroupBox" name="groupBox_2">
      <property name="font">
       <font>
        <pointsize>12</pointsize>
       </font>
      </property>
-     <property name="text">
-      <string>AxisLink</string>
+     <property name="title">
+      <string>External Link</string>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_6">
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QLabel" name="lbHyperLink_1">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>

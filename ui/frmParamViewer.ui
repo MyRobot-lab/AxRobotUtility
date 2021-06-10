@@ -52,9 +52,9 @@
      <property name="documentMode">
       <bool>false</bool>
      </property>
-     <widget class="QWidget" name="MotionControl">
+     <widget class="QWidget" name="Controller">
       <attribute name="title">
-       <string>MotionControl</string>
+       <string>Controller</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>

@@ -224,7 +224,7 @@
            </font>
           </property>
           <property name="text">
-           <string>EtherCAT Master F/W Path: </string>
+           <string>Controller F/W Path: </string>
           </property>
          </widget>
         </item>
@@ -243,7 +243,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Servo Driver F/W Path: </string>
+           <string>ServoDrive F/W Path: </string>
           </property>
          </widget>
         </item>
@@ -274,7 +274,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Servo Parameter Upgrade</string>
+      <string>ServoDrive Parameter Upgrade</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <property name="horizontalSpacing">
@@ -334,7 +334,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Servo Selection: </string>
+           <string>ServoDrive Selection: </string>
           </property>
          </widget>
         </item>
@@ -359,7 +359,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Servo Parameter Path: </string>
+           <string>ServoDrive Parameter Path: </string>
           </property>
          </widget>
         </item>

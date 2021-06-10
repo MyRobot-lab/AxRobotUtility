@@ -1,14 +1,4 @@
 # -*- coding: utf-8 -*-
-# /*
-#  *********************************************************************************
-#  *     Copyright (c) 2021 ASIX Electronics Corporation All rights reserved.
-#  *
-#  *     This is unpublished proprietary source code of ASIX Electronics Corporation
-#  *
-#  *     The copyright notice above does not evidence any actual or intended
-#  *     publication of such source code.
-#  *********************************************************************************
-#  */
 import sys, logging, time
 import numpy as np
 from PyQt5.QtWidgets import QWidget, QFileDialog
@@ -51,6 +41,9 @@ class frmUpgrade(QWidget, Ui_Form):
         self.btnDownloadParameter.clicked.connect(self.sltPushButtonHandler)
         self.btnBrowseServoParameter.clicked.connect(self.sltPushButtonHandler)
         self.cboParameterPathSelector.currentTextChanged.connect(self.sltCurrentTextChanged)
+        self.leEcatMasterFirmwarePath.editingFinished.connect(self.sltEditingFinished)
+        self.leServoFirmwarePath.editingFinished.connect(self.sltEditingFinished)
+        self.leServoParameterPath.editingFinished.connect(self.sltEditingFinished)
 
         # Init GUI status
         self.sigEventHandler.emit({"StatusChange":["Ready"]})
@@ -78,12 +71,31 @@ class frmUpgrade(QWidget, Ui_Form):
 
     @pyqtSlot(str)
     def sltCurrentTextChanged(self, currText):
-        cbo = self.sender()
-        if cbo.objectName() == "cboParameterPathSelector":
+        inst = self.sender()
+        log.debug("sltCurrentTextChanged:%s\r\n", inst.objectName())
+
+        if inst.objectName() == "cboParameterPathSelector":
             i = self.cboParameterPathSelector.currentIndex()
             if i < len(dctAPP_CFIG["SERVO_PARAM_PATH"]):
-                path = dctAPP_CFIG["SERVO_PARAM_PATH"][i]
-                self.leServoParameterPath.setText(path)
+                self.leServoParameterPath.setText(dctAPP_CFIG["SERVO_PARAM_PATH"][i])
+                
+    @pyqtSlot()
+    def sltEditingFinished(self):
+        inst = self.sender()
+
+        if inst.objectName() == "leEcatMasterFirmwarePath":
+            dctAPP_CFIG["ECAT_MASTER_FW_PATH"] = self.leEcatMasterFirmwarePath.text()
+            log.debug("leEcatMasterFirmwarePath:%s\r\n", dctAPP_CFIG["ECAT_MASTER_FW_PATH"])
+
+        elif inst.objectName() == "leServoFirmwarePath":
+            dctAPP_CFIG["SERVO_FW_PATH"] = self.leServoFirmwarePath.text()
+            log.debug("leServoFirmwarePath:%s\r\n", dctAPP_CFIG["SERVO_FW_PATH"])
+
+        elif inst.objectName() == "leServoParameterPath":
+            i = self.cboParameterPathSelector.currentIndex()
+            if i < len(dctAPP_CFIG["SERVO_PARAM_PATH"]):
+                dctAPP_CFIG["SERVO_PARAM_PATH"][i] = self.leServoParameterPath.text()
+                log.debug("leServoParameterPath:%s\r\n", dctAPP_CFIG["SERVO_PARAM_PATH"][i])
 
     @pyqtSlot(dict)
     def sltEventHandler(self, dctEvents):
@@ -94,12 +106,12 @@ class frmUpgrade(QWidget, Ui_Form):
                 if self.cboFirmwareTargetSelector.currentIndex() <= 1:
                     if self.leEcatMasterFirmwarePath.text() == "":
                         self.MotionCtrl.sigMainWinEventHandler.emit({"SetMsgBox": \
-                        ["Error", "EtherCAT master firmware path is empty"]})
+                        ["Error", "AxRobot Controller firmware path is empty"]})
                         break
                 if self.cboFirmwareTargetSelector.currentIndex() > 0:
                     if self.leServoFirmwarePath.text() == "":
                         self.MotionCtrl.sigMainWinEventHandler.emit({"SetMsgBox": \
-                        ["Error", "Servo firmware path is empty"]})
+                        ["Error", "AxRobot Servo Drive firmware path is empty"]})
                         break
                 self.sigUpgradeProcess.emit({"DownloadFirmware": \
                     [self.cboFirmwareTargetSelector.currentIndex(), \
@@ -136,7 +148,7 @@ class frmUpgrade(QWidget, Ui_Form):
                     p = p[0]
                 filePath = self.GetPathFromFileBrowser("Select Servo Parameter File", \
                                             p, \
-                                            "parameter file (*.txt)", \
+                                            "servo parameter file (*.txt)", \
                                             ".txt")
                 filePath = filePath.strip(" ")
                 if filePath != "":
@@ -166,21 +178,21 @@ class frmUpgrade(QWidget, Ui_Form):
 
     def ReloadFirmwareTargetSelector(self):
         self.cboFirmwareTargetSelector.clear()
-        self.cboFirmwareTargetSelector.addItem("EtherCAT Master")
+        self.cboFirmwareTargetSelector.addItem("Controller")
         if self.MotionCtrl.StartUp.OnlineServoCount != 0:
-            self.cboFirmwareTargetSelector.addItem("EtherCAT Master + All Axes")
-            self.cboFirmwareTargetSelector.addItem("All Axes")
+            self.cboFirmwareTargetSelector.addItem("Controller + All Servo Drives")
+            self.cboFirmwareTargetSelector.addItem("All Servo Drives")
             for i in range(self.MotionCtrl.StartUp.OnlineServoCount):
-                self.cboFirmwareTargetSelector.addItem("Axis "+str(i+1))
+                self.cboFirmwareTargetSelector.addItem("Servo Drive "+str(i+1))
 
     def ReloadParameterTargetSelector(self):
         self.cboParameterTargetSelector.clear()
         self.cboParameterPathSelector.clear()
         if self.MotionCtrl.StartUp.OnlineServoCount != 0:
-            self.cboParameterTargetSelector.addItem("All Axes")
+            self.cboParameterTargetSelector.addItem("All Servo Drives")
             for i in range(self.MotionCtrl.StartUp.OnlineServoCount):
-                self.cboParameterTargetSelector.addItem("Axis "+str(i+1))
-                self.cboParameterPathSelector.addItem("Axis "+str(i+1))
+                self.cboParameterTargetSelector.addItem("Servo Drive "+str(i+1))
+                self.cboParameterPathSelector.addItem("Servo Drive "+str(i+1))
 
     def StatusChange(self, status):
         if status == "Ready":

@@ -4,8 +4,8 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
 logging.basicConfig(stream=sys.stdout)
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
-#log.setLevel(logging.CRITICAL)
+#log.setLevel(logging.DEBUG)
+log.setLevel(logging.CRITICAL)
 
 # Global variable
 MaxAxisNum = 7
@@ -27,8 +27,8 @@ dctAPP_CFIG = {
     "PARAM_PATH":"./param/",
     "SCRIPT_PATH":"./script/",
     "SIMU3D_PATH":"./simu/",
-    "ECAT_MASTER_FW_PATH":"../../../Firmware/Binary/EtherCAT_Master_Firmware/AX58200_EtherCATMaster_Firmware_v100.bin",
-    "SERVO_FW_PATH":"../../../Firmware/Binary/EtherCAT_Slave_ServoDrive_Firmware/AX58200_ServoDrive_Firmware_v100.bin",
+    "ECAT_MASTER_FW_PATH":"../../../Firmware/Binary/AxRobot_Controller_Firmware/AxRobot_Controller_Firmware_v100.bin",
+    "SERVO_FW_PATH":"../../../Firmware/Binary/AxRobot_ServoDrive_Firmware/AxRobot_ServoDrive_Firmware_v100.bin",
     "SERVO_PARAM_PATH": [ \
         "./param/AxisParam1.txt", \
         "./param/AxisParam2.txt", \
@@ -43,8 +43,13 @@ dctAPP_CFIG = {
     # External python file path
     "Ext_PY_PATH":"./program/",
 
-    #Document path
-    "USER_GUIDE_PATH":"..\\..\\..\\Document\\AxRobot_UserGuide_v100.pdf"
+    # Document path
+    "USER_GUIDE_PATH":"..\\..\\..\\Document\\AxRobot_UserGuide_v100.pdf",
+
+    # About dialog information
+    "ABOUT_ICON":"./img/asix.ico",
+    "LINK_TITLE_1":"AxRobotUtility GitHub",
+    "HYPER_LINK_1":"https://github.com/MyRobot-lab/AxRobotUtility"
     }
 
 # Flags Definition

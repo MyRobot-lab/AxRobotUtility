@@ -29,7 +29,7 @@
     </font>
    </property>
    <property name="title">
-    <string>Motion Controller Information</string>
+    <string>AxRobot Utility Information</string>
    </property>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
@@ -67,7 +67,7 @@
     </font>
    </property>
    <property name="title">
-    <string>EtherCAT Master Information</string>
+    <string>AxRobot Controller Information</string>
    </property>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
@@ -106,7 +106,7 @@
     </font>
    </property>
    <property name="title">
-    <string>Servo Drive Information</string>
+    <string>AxRobot ServoDrive Information</string>
    </property>
    <widget class="QLabel" name="label_2">
     <property name="geometry">

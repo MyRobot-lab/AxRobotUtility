@@ -75,11 +75,11 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Motion Controller Information"))
+        self.groupBox.setTitle(_translate("Form", "AxRobot Utility Information"))
         self.label_3.setText(_translate("Form", "Version: "))
-        self.groupBox_2.setTitle(_translate("Form", "EtherCAT Master Information"))
+        self.groupBox_2.setTitle(_translate("Form", "AxRobot Controller Information"))
         self.label_4.setText(_translate("Form", "Version: "))
-        self.groupBox_3.setTitle(_translate("Form", "Servo Drive Information"))
+        self.groupBox_3.setTitle(_translate("Form", "AxRobot ServoDrive Information"))
         self.label_2.setText(_translate("Form", "Index: "))
         self.label_5.setText(_translate("Form", "Firmware Version: "))
         self.label_6.setText(_translate("Form", "Parameter Version: "))

@@ -21,7 +21,7 @@
     "MOTION_CONFIG_PATH": "./param/motion_cfg.mcf",
     "Ext_PY_PATH": "./program/",
     "USER_GUIDE_PATH": "..\\..\\..\\Document\\AxRobot_UserGuide_v100.pdf",
-    "ABOUT_ICON": "./img/asix.ico",
+    "ABOUT_ICON": "./img/infoIcon.png",
     "LINK_TITLE_1": "AxRobotUtility GitHub",
     "HYPER_LINK_1": "https://github.com/MyRobot-lab/AxRobotUtility"
 }

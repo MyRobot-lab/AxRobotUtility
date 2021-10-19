@@ -3,7 +3,7 @@ The GUI control tool for AxRobot system
 ![image](https://user-images.githubusercontent.com/85493498/121017178-91034380-c7cf-11eb-902c-98963efdd70c.png)
 
 # AxRobot System Main Components
-![image](https://user-images.githubusercontent.com/85493498/121016000-387f7680-c7ce-11eb-8321-267924952b45.png)
+![Figure_2](https://user-images.githubusercontent.com/85493498/137885591-d80185bf-9a74-4a3e-a94f-db8add66d84a.png)
 
 # Features
 - StartUp
